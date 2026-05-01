@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glowvella Beauty | your glow, your era ✨</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #ff6fd8;
+        --secondary: #c9b8ff;
+        --accent: #ffd6c0;
+        --bg-vanilla: #fff5f9;
+        --text-plum: #2d0033;
+        --glass: rgba(255, 255, 255, 0.4);
+        --glass-border: rgba(255, 255, 255, 0.6);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        cursor:
+          url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' style='fill:hotpink'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>")
+            12 12,
+          auto;
+      }
+
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background-color: var(--bg-vanilla);
+        color: var(--text-plum);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 600;
+      }
+
+      .script-font {
+        font-family: "Dancing Script", cursive;
+      }
+
+      /* --- Animations --- */
+      @keyframes meshGradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+      }
+
+      @keyframes sparkle {
+        0%,
+        100% {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* --- Navigation --- */
+      nav {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 1200px;
+        background: var(--glass);
+        backdrop-filter: blur(15px);
+        border: 1px solid var(--glass-border);
+        border-radius: 50px;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      nav.scrolled {
+        top: 0;
+        width: 100%;
+        border-radius: 0;
+        background: rgba(255, 111, 216, 0.1);
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: var(--text-plum);
+      }
+
+      .logo span {
+        color: var(--primary);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 25px;
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-plum);
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .nav-icons {
+        display: flex;
+        gap: 15px;
+        font-size: 1.2rem;
+      }
+
+      /* --- Hero Section --- */
+      .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: linear-gradient(-45deg, #ff6fd8, #c9b8ff, #ffd6c0, #fff5f9);
+        background-size: 400% 400%;
+        animation: meshGradient 15s ease infinite;
+        padding: 0 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 10vw, 6rem);
+        margin-bottom: 20px;
+        line-height: 0.9;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin-bottom: 30px;
+        font-weight: 300;
+      }
+
+      .cta-group {
+        display: flex;
+        gap: 15px;
+      }
+
+      .btn {
+        padding: 15px 35px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s;
+      }
+
+      .btn:hover {
+        transform: scale(1.05);
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+        box-shadow: 0 10px 20px rgba(255, 111, 216, 0.4);
+      }
+
+      .btn-secondary {
+        background: white;
+        color: var(--primary);
+      }
+
+      .btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transform: translateX(-100%);
+      }
+
+      .btn:hover::after {
+        animation: shimmer 0.8s forwards;
+      }
+
+      .floating-product {
+        position: absolute;
+        right: 10%;
+        top: 50%;
+        width: 250px;
+        animation: float 6s ease-in-out infinite;
+        filter: drop-shadow(0 20px 30px rgba(255, 111, 216, 0.3));
+        z-index: 1;
+      }
+
+      .sparkle-decor {
+        position: absolute;
+        font-size: 2rem;
+        animation: sparkle 3s infinite;
+      }
+
+      /* --- Marquee --- */
+      .marquee {
+        background: var(--primary);
+        color: white;
+        padding: 15px 0;
+        overflow: hidden;
+        white-space: nowrap;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .marquee-content {
+        display: inline-block;
+        animation: scrollMarquee 20s linear infinite;
+      }
+
+      @keyframes scrollMarquee {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* --- Products Section --- */
+      .products {
+        padding: 100px 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 3.5rem;
+        margin-bottom: 50px;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+      }
+
+      .product-card {
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--glass-border);
+        border-radius: 25px;
+        padding: 20px;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+      }
+
+      .product-card:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 20px 40px rgba(255, 111, 216, 0.2);
+        border-color: var(--primary);
+      }
+
+      .product-img {
+        width: 100%;
+        height: 250px;
+        background: #eee;
+        border-radius: 20px;
+        margin-bottom: 15px;
+        object-fit: cover;
+        filter: sepia(20%) hue-rotate(310deg) saturate(150%);
+      }
+
+      .badge {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        background: var(--text-plum);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-weight: 800;
+      }
+
+      .price {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin: 10px 0;
+      }
+
+      /* --- Routine Strip --- */
+      .routine {
+        background: var(--accent);
+        padding: 80px 5%;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+
+      .step-card {
+        text-align: center;
+        flex: 1;
+        min-width: 250px;
+      }
+
+      .step-card h3 {
+        font-size: 2rem;
+      }
+
+      /* --- Footer --- */
+      footer {
+        background: var(--text-plum);
+        color: white;
+        padding: 80px 5% 40px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        margin-bottom: 50px;
+      }
+
+      .footer-logo {
+        font-size: 2rem;
+        color: white;
+        margin-bottom: 20px;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+      .footer-links a {
+        color: #ccc;
+        text-decoration: none;
+      }
+
+      .newsletter input {
+        padding: 12px 20px;
+        border-radius: 50px;
+        border: none;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      /* Mobile Adjustments */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .hero h1 {
+          font-size: 3.5rem;
+        }
+        .floating-product {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sparkle Elements -->
+    <div class="sparkle-decor" style="top: 20%; left: 10%">✨</div>
+    <div
+      class="sparkle-decor"
+      style="top: 15%; right: 15%; animation-delay: 1s"
+    >
+      💖
+    </div>
+    <div
+      class="sparkle-decor"
+      style="bottom: 30%; left: 20%; animation-delay: 2s"
+    >
+      ✨
+    </div>
+
+    <nav id="navbar">
+      <a href="#" class="logo <script-font>"
+        ><span class="script-font">glowvella</span> beauty</a
+      >
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Skinspiration</a></li>
+      </ul>
+      <div class="nav-icons">
+        <span>🔍</span>
+        <span>🤍</span>
+        <span>🛍️</span>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <img
+        src="https://placehold.co/400x600/FFD6C0/2D0033?text=✨"
+        alt="Glow"
+        class="floating-product"
+      />
+      <h1 class="reveal">your glow era<br />starts here ✨</h1>
+      <p class="reveal">
+        Gen Z makeup crafted for soft girls, bold girls & every girl in between
+        💕
+      </p>
+      <div class="cta-group reveal">
+        <a href="#shop" class="btn btn-primary">Shop Now 💄</a>
+        <a href="#" class="btn btn-secondary">Watch Reels 🎬</a>
+      </div>
+    </section>
+
+    <div class="marquee">
+      <div class="marquee-content">
+        ✨ free shipping over $35 · 💕 cruelty free always · 🌸 new spring drop
+        is here · 💄 glow different · ✨ free shipping over $35 · 💕 cruelty
+        free always · 🌸 new spring drop is here · 💄 glow different ·
+      </div>
+    </div>
+
+    <section class="products" id="shop">
+      <h2 class="section-title reveal">the it-girl shelf 💅</h2>
+      <div class="product-grid">
+        <!-- Card 1 -->
+        <div class="product-card reveal">
+          <span class="badge">Fan Fave ✨</span>
+          <img
+            src="https://picsum.photos/id/1027/400/500"
+            alt="Lip Oil"
+            class="product-img"
+          />
+          <h3 class="script-font" style="font-size: 1.8rem">Glazed Lip Oil</h3>
+          <p>glass lips loading...</p>
+          <p class="price">$18.00</p>
+          <a href="#" class="btn btn-primary" style="font-size: 0.7rem"
+            >Add to Bag 🛍️</a
+          >
+        </div>
+        <!-- Card 2 -->
+        <div class="product-card reveal">
+          <span class="badge">New Drop 💅</span>
+          <img
+            src="https://picsum.photos/id/1026/400/500"
+            alt="Blush"
+            class="product-img"
+          />
+          <h3 class="script-font" style="font-size: 1.8rem">
+            Cloud Blush Stick
+          </h3>
+          <p>your cheeks but cuter</p>
+          <p class="price">$22.00</p>
+          <a href="#" class="btn btn-primary" style="font-size: 0.7rem"
+            >Add to Bag 🛍️</a
+          >
+        </div>
+        <!-- Card 3 -->
+        <div class="product-card reveal">
+          <img
+            src="https://picsum.photos/id/349/400/500"
+            alt="Mascara"
+            class="product-img"
+          />
+          <h3 class="script-font" style="font-size: 1.8rem">
+            Lash Serum Mascara
+          </h3>
+          <p>lashes with a zip code</p>
+          <p class="price">$24.00</p>
+          <a href="#" class="btn btn-primary" style="font-size: 0.7rem"
+            >Add to Bag 🛍️</a
+          >
+        </div>
+        <!-- Card 4 -->
+        <div class="product-card reveal">
+          <span class="badge">Limited 🖤</span>
+          <img
+            src="https://picsum.photos/id/648/400/500"
+            alt="Liner"
+            class="product-img"
+          />
+          <h3 class="script-font" style="font-size: 1.8rem">
+            Glitter Liner Kit
+          </h3>
+          <p>inner rockstar vibes</p>
+          <p class="price">$30.00</p>
+          <a href="#" class="btn btn-primary" style="font-size: 0.7rem"
+            >Add to Bag 🛍️</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="routine reveal">
+      <div class="step-card">
+        <h3>Step 1 🧴</h3>
+        <p class="script-font">Prep</p>
+        <p>The perfect skincare base for a 10/10 glow.</p>
+      </div>
+      <div class="step-card">
+        <h3>Step 2 💄</h3>
+        <p class="script-font">Glam</p>
+        <p>Your essentials for that "clean girl" aesthetic.</p>
+      </div>
+      <div class="step-card">
+        <h3>Step 3 ✨</h3>
+        <p class="script-font">Set</p>
+        <p>Lock it in. No smudges, just vibes.</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-logo <script-font>">glowvella</h2>
+          <p>
+            Making every era a glow era. Cruelty-free, vegan, and designed for
+            you. 💕
+          </p>
+        </div>
+        <div>
+          <h4>Shop</h4>
+          <ul class="footer-links">
+            <li><a href="#">New Arrivals</a></li>
+            <li><a href="#">Best Sellers</a></li>
+            <li><a href="#">Bundles</a></li>
+          </ul>
+        </div>
+        <div class="newsletter">
+          <h4>Join the Glow Squad 💌</h4>
+          <p style="font-size: 0.8rem; margin-bottom: 10px">
+            15% off your first order!
+          </p>
+          <input type="email" placeholder="email address..." />
+          <button class="btn btn-primary" style="width: 100%; border: none">
+            I'm In 💕
+          </button>
+        </div>
+      </div>
+      <hr style="opacity: 0.1; margin-bottom: 20px" />
+      <p style="text-align: center; font-size: 0.8rem; opacity: 0.6">
+        &copy; 2026 Glowvella Beauty. Made with 💕 for every glow era.
+      </p>
+    </footer>
+
+    <script>
+      // Scroll Reveal Logic
+      const observerOptions = {
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      }, observerOptions);
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      // Navbar Scroll Effect
+      window.addEventListener("scroll", () => {
+        const nav = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+          nav.classList.add("scrolled");
+        } else {
+          nav.classList.remove("scrolled");
+        }
+      });
+    </script>
+  </body>
+</html>
